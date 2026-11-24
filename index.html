@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0a0b">
+<title>OpenBlog — talk to AI, publish the blog</title>
+<meta name="description" content="OpenBlog turns your AI chat history into publishable blogs, in all languages imaginable. Built on the shared Dawn library @dawn-studio/blog: editing, posting, reviewing and publishing, end to end.">
+<meta property="og:title" content="OpenBlog — talk to AI, publish the blog">
+<meta property="og:description" content="OpenBlog turns your AI chat history into publishable blogs, in all languages imaginable. Built on the shared Dawn library @dawn-studio/blog: editing, posting, reviewing and publishing, end to end.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://openblog.dawnstudio.app/">
+<meta property="og:site_name" content="OpenBlog">
+<meta property="og:image" content="https://openblog.dawnstudio.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenBlog — Dawn Studio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenBlog — talk to AI, publish the blog">
+<meta name="twitter:description" content="OpenBlog turns your AI chat history into publishable blogs, in all languages imaginable. Built on the shared Dawn library @dawn-studio/blog: editing, posting, reviewing and publishing, end to end.">
+<meta name="twitter:image" content="https://openblog.dawnstudio.app/og.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0b;--surface:#141416;--surface2:#1c1c1f;--text:#f5f2ea;--muted:#a7a29a;--border:#2a2a2e;--accent:#f5c86b;--accent-ink:#1a1405}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC",sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px;width:100%;min-width:0}
+header.site{position:sticky;top:0;z-index:10;background:rgba(10,10,11,.92);border-bottom:1px solid var(--border)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;padding-bottom:12px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0;text-decoration:none;color:var(--text)}
+.brand img{width:30px;height:30px;border-radius:22%;flex:none}
+.brand span{font-weight:700;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.headlinks{display:flex;align-items:center;gap:10px;flex:none}
+.headlinks a{color:var(--muted);text-decoration:none;font-size:14px}
+.headlinks a:hover{color:var(--text)}
+.langbtn{background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:6px 14px;font-size:14px;cursor:pointer;max-width:100%}
+.hero{padding:72px 0 48px;text-align:left}
+.kicker{color:var(--accent);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;margin-bottom:16px}
+h1{font-size:clamp(30px,6vw,52px);line-height:1.15;font-weight:800;overflow-wrap:break-word}
+.hero p.lede{margin-top:20px;font-size:clamp(16px,2.6vw,20px);color:var(--muted);max-width:640px;overflow-wrap:break-word}
+.status{display:inline-block;margin-top:26px;background:var(--surface2);border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:14px;max-width:100%;overflow-wrap:break-word}
+.status b{color:var(--accent)}
+section{padding:34px 0;border-top:1px solid var(--border)}
+h2{font-size:24px;margin-bottom:14px}
+section p,section li{color:var(--muted);overflow-wrap:break-word}
+section p+p{margin-top:12px}
+ul,ol{padding-left:22px}
+li{margin:8px 0}
+li b,section p b{color:var(--text)}
+.cards{display:grid;grid-template-columns:1fr;gap:12px;margin-top:6px}
+@media(min-width:640px){.cards{grid-template-columns:1fr 1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;min-width:0}
+.card h3{font-size:16px;margin-bottom:6px}
+.card p{font-size:15px}
+.card a{color:var(--accent);text-decoration:none;font-weight:600}
+blockquote{border-left:3px solid var(--accent);padding:4px 0 4px 16px;margin:14px 0;color:var(--text);font-size:17px;overflow-wrap:break-word}
+footer.site{border-top:1px solid var(--border);padding:30px 0 44px;margin-top:20px}
+footer.site .wrap{display:flex;flex-direction:column;gap:8px}
+footer.site a{color:var(--muted);text-decoration:none}
+footer.site a:hover{color:var(--text)}
+.footbrand{display:flex;align-items:center;gap:8px;color:var(--text);font-weight:600}
+.footbrand img{width:22px;height:22px;border-radius:22%}
+.small{font-size:13px;color:var(--muted)}
+[data-lang="zh"]{display:none}
+html[lang="zh-Hant"] [data-lang="zh"]{display:block}
+html[lang="zh-Hant"] [data-lang="en"]{display:none}
+html[lang="zh-Hant"] span[data-lang="zh"]{display:inline}
+html[lang="zh-Hant"] span[data-lang="en"]{display:none}
+span[data-lang="zh"]{display:none}
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="brand" href="/"><img src="/favicon-32.png" alt="OpenBlog logo"><span>OpenBlog</span></a>
+<div class="headlinks"><a href="https://dawnstudio.app/">Dawn Studio</a><button class="langbtn" onclick="setLang(document.documentElement.lang==='zh-Hant'?'en':'zh')">繁中</button></div>
+</div></header>
+<main class="wrap">
+<div class="hero">
+<div class="kicker">Dawn Studio</div>
+<h1><span data-lang="en">Talk to AI. The publishable blog is ready for you.</span><span data-lang="zh">同 AI 講完，出得街嘅 blog 就準備好俾你。</span></h1>
+<p class="lede"><span data-lang="en">Everyone talks to an LLM every day — Claude, Muse, Grok, Gemini, any of them. OpenBlog turns that talk into published blogs, in all language imaginable.</span><span data-lang="zh">人人每日都同 LLM 講嘢 — Claude、Muse、Grok、Gemini，邊個都好。OpenBlog 將嗰啲對話變成已出版嘅 blog — 所有想像得到嘅語言。</span></p>
+<div class="status"><span data-lang="en">STATUS — <b>Founding — founded 2026-11-24 · engine @dawn-studio/blog in design · dogfood migration first</b></span><span data-lang="zh">狀態 — <b>創建中 — 2026-11-24 創立 · 引擎 @dawn-studio/blog 設計中 · 先做 dogfood 遷移</b></span></div>
+</div>
+<section><h2><span data-lang="en">What it is</span><span data-lang="zh">呢個係咩</span></h2>
+<div data-lang="en"><p>In its founder's words:</p>
+<blockquote>“We as human talk to ai and then the publishable blog are ready for you in all language imaginable.”</blockquote>
+<p>CMS services are not merging or embracing AI the way Dawn does. Everyone already talks to an LLM daily, but they cannot turn that talk into published blogs. <b>OpenBlog is here to help</b> — it lets every human post the way Dawn's founder posts: talk first, publish second.</p>
+<p>The engine is one common Dawn library — <b>@dawn-studio/blog</b> — an end-to-end blog service concentrating <b>editing / posting / reviewing / publishing</b>, with UI/UX and Cloudflare infrastructure, an editorial <b>“what blog is next” queue</b>, and generation of new blogs <b>from AI chat history</b> (any LLM).</p></div><div data-lang="zh"><p>創辦人原話：</p>
+<blockquote>「我哋人類同 AI 講嘢，然後出得街嘅 blog 就準備好俾你 — 所有想像得到嘅語言。」</blockquote>
+<p>現有 CMS 服務冇好似 Dawn 咁擁抱、融合 AI。人人每日都同 LLM 講嘢，但冇辦法將嗰啲對話變成出版咗嘅 blog。<b>OpenBlog 就係嚟幫手嘅</b> — 令每個人都可以好似 Dawn 創辦人咁出文：先講，後出版。</p>
+<p>引擎係一條 Dawn 共用 library — <b>@dawn-studio/blog</b> — 一站式 blog 服務，集中<b>編輯 / 發佈 / 審閱 / 出版</b>，連 UI/UX 同 Cloudflare 基建、一條編輯部<b>「下一篇 blog 係咩」隊列</b>，同埋<b>由 AI 對話記錄生成新 blog</b>（任何 LLM 都得）。</p></div></section>
+<section><h2><span data-lang="en">END GOAL</span><span data-lang="zh">最終目標</span></h2>
+<div data-lang="en"><p><b>Every human can publish like this.</b> The talk you already have with AI — every day, in any app — becomes a finished, reviewed, published blog in all language imaginable. No blank page, no CMS wrestling: talk, and the blog is ready.</p></div><div data-lang="zh"><p><b>每個人都可以咁樣出版。</b>你每日已經同 AI 講緊嘅嘢 — 任何 app 都好 — 變成一篇完成、審閱好、出版咗嘅 blog，所有想像得到嘅語言。冇空白頁，冇同 CMS 搏鬥：講完，blog 就好。</p></div></section>
+<section><h2><span data-lang="en">ROADMAP</span><span data-lang="zh">路線圖</span></h2>
+<div data-lang="en"><ol>
+<li><b>@dawn-studio/blog</b> — the common library: end-to-end editing / posting / reviewing / publishing service, UI/UX + Cloudflare infra.</li>
+<li><b>Dogfood first</b> — hectorchan.com and dawnstudio.app blogs migrate onto it first (today's hand-run sync waves, trilingual pipeline, layout and media cards are the manual prototype of this service).</li>
+<li><b>The editorial queue</b> — a standing “what blog is next” queue driving what gets written and published.</li>
+<li><b>From chat history</b> — new blogs generated from AI chat history, whatever LLM the talk happened in.</li>
+<li><b>Open to every human</b> — publishable blogs for everyone, in all language imaginable.</li>
+</ol></div><div data-lang="zh"><ol>
+<li><b>@dawn-studio/blog</b> — 共用 library：一站式編輯 / 發佈 / 審閱 / 出版服務，UI/UX + Cloudflare 基建。</li>
+<li><b>Dogfood 先行</b> — hectorchan.com 同 dawnstudio.app 嘅 blog 率先遷移上去（今日人手跑嘅同步、三語管線、版面同 media card，就係呢個服務嘅人手原型）。</li>
+<li><b>編輯隊列</b> — 一條長期嘅「下一篇 blog 係咩」隊列，主導寫咩、出咩。</li>
+<li><b>由對話記錄生成</b> — 新 blog 由 AI 對話記錄生成，無論嗰次對話喺邊個 LLM 發生。</li>
+<li><b>開放俾每個人</b> — 人人出得街嘅 blog，所有想像得到嘅語言。</li>
+</ol></div></section>
+</main>
+<footer class="site"><div class="wrap">
+<div class="footbrand"><img src="/favicon-32.png" alt=""> OpenBlog</div>
+<div class="small"><span data-lang="en">Founded 2026-11-24 · A Dawn Studio product · Engine: @dawn-studio/blog</span><span data-lang="zh">2026-11-24 創立 · Dawn Studio 產品 · 引擎：@dawn-studio/blog</span></div>
+<div class="small"><a href="https://dawnstudio.app/">dawnstudio.app</a> · <a href="https://openschool.dawnstudio.app/">OpenSchool</a> · <a href="https://openteacher.dawnstudio.app/">OpenTeacher</a> · <a href="https://openmusic.dawnstudio.app/">OpenMusic</a></div>
+<div class="small">© 2026 Dawn Studio · No trackers on this page.</div>
+</div></footer>
+<script>
+function setLang(l){document.documentElement.lang=(l==='zh'?'zh-Hant':'en');try{localStorage.setItem('lang',l)}catch(e){}document.querySelectorAll('.langbtn').forEach(b=>b.textContent=(l==='zh'?'EN':'繁中'));}
+(function(){var l='en';try{l=localStorage.getItem('lang')||((navigator.language||'').toLowerCase().indexOf('zh')===0?'zh':'en')}catch(e){}setLang(l);})();
+</script>
+</body>
+</html>
